@@ -18,4 +18,22 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:aTarget selector:fireBlockAfterDelay object:nil];
     [aTarget performSelector:fireBlockAfterDelay withObject:nil afterDelay:delay];
 }
+/*block实现*/
++(void)startperformBlock:(void (^)(void))block  delay: (NSTimeInterval)delay{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fireBlockAfterDelay:) object:block];
+    [self performSelector:@selector(fireBlockAfterDelay:) withObject:block afterDelay:delay];
+}
+
++ (void)performBlock:(void (^)(void))block
+          afterDelay:(NSTimeInterval)delay
+{
+    block = [block copy] ;
+    [self performSelector:@selector(fireBlockAfterDelay:)
+               withObject:block
+               afterDelay:delay];
+}
+
++ (void)fireBlockAfterDelay:(void (^)(void))block {
+    block();
+}
 @end

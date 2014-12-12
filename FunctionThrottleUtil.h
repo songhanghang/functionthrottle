@@ -12,4 +12,11 @@
 /*函数节流*/
 +(void)startWithTarget:(id)aTarget  delayCallback:(SEL) fireBlockAfterDelay;
 +(void)startWithTarget:(id)aTarget  delayCallback:(SEL) fireBlockAfterDelay delay: (NSTimeInterval)delay;
+
+/*函数节流block*/
++(void)startperformBlock:(void (^)(void))block  delay: (NSTimeInterval)delay;
+
++ (void)performBlock:(void (^)(void))block
+          afterDelay:(NSTimeInterval)delay;
++ (void)fireBlockAfterDelay:(void (^)(void))block;
 @end
